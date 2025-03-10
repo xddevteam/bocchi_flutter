@@ -35,6 +35,11 @@ jobs:
       - name: Run Flutter Analyzer
         run: flutter analyze
 
-      
       - name: Build APK
         run: flutter build apk --release
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: release-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
