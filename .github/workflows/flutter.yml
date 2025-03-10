@@ -14,8 +14,20 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.3.0'  # Gunakan versi yang mendukung Dart 2.18.x
+          flutter-version: '3.10.0'  # Sesuaikan dengan versi Flutter yang mendukung Dart 2.18.x
           channel: 'stable'
+
+      - name: Debug Flutter Environment
+        run: flutter doctor -v  # Mengecek informasi SDK untuk debugging
+
+      - name: Cache Flutter Dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.pub-cache
+          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pub-
 
       - name: Install Dependencies
         run: flutter pub get
